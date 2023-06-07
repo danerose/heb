@@ -13,48 +13,52 @@ class SplashView extends StatefulWidget {
 
 class _SplashViewState extends State<SplashView> {
   @override
-  void initState() {
-    Future.delayed(
-      const Duration(milliseconds: 1500),
-      () {
-        Navigator.pushNamedAndRemoveUntil(
-          context,
-          RoutesConstants.home,
-          (route) => false,
-        );
-      },
-    );
-    super.initState();
-  }
+  // void initState() {
+  //   Future.delayed(
+  //     const Duration(milliseconds: 1500),
+  //     () {
+  //       Navigator.pushNamedAndRemoveUntil(
+  //         context,
+  //         RoutesConstants.home,
+  //         (route) => false,
+  //       );
+  //     },
+  //   );
+  //   super.initState();
+  // }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: injector.get<ColorsConstants>().primary,
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Center(
-            child: Text(
-              context.l10n.splashScreenForDemostration,
-              style: const TextStyle(
-                color: ColorsConstants.white,
+      body: SafeArea(
+        child: Stack(
+          children: [
+            const Center(
+              child: SizedBox(
+                width: 25,
+                height: 25,
+                child: CircularProgressIndicator(
+                  strokeWidth: 2,
+                  color: ColorsConstants.black,
+                ),
               ),
             ),
-          ),
-          const SizedBox(height: 30),
-          const Center(
-            child: SizedBox(
-              width: 20,
-              height: 20,
-              child: CircularProgressIndicator(
-                strokeWidth: 2,
-                color: ColorsConstants.black,
+            Positioned(
+              bottom: 20,
+              left: 0,
+              right: 0,
+              child: Center(
+                child: Text(
+                  context.l10n.splashScreenForDemostration,
+                  style: const TextStyle(
+                    color: ColorsConstants.white,
+                  ),
+                ),
               ),
             ),
-          )
-        ],
+          ],
+        ),
       ),
     );
   }
