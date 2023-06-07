@@ -1,4 +1,5 @@
 {
     "appTitle": "Pokemon",
-    "hello": "Hello"
+    "hello": "Hello",
+    "splashScreenForDemostration": "This screen is only for demostration porpuses."
 }

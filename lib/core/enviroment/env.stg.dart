@@ -6,5 +6,5 @@ class StagingEnv implements Environments {
   String get apiURL => 'https://pokeapi.co/api/v2/pokemon';
 
   @override
-  EnviromentEnum get env => EnviromentEnum.development;
+  EnviromentEnum get env => EnviromentEnum.staging;
 }

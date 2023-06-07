@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:flutter/material.dart';
 import 'package:heb/core/enum/enviroments.enum.dart';
 
 class ColorsConstants {
@@ -9,11 +10,11 @@ class ColorsConstants {
   Color get primary {
     switch (env) {
       case EnviromentEnum.development:
-        return const Color.fromARGB(255, 69, 0, 109);
+        return Colors.deepPurple;
       case EnviromentEnum.staging:
-        return const Color.fromARGB(255, 44, 26, 146);
+        return Colors.amber;
       default:
-        return const Color.fromARGB(255, 179, 0, 196);
+        return Colors.pinkAccent[200] ?? Colors.pink;
     }
   }
 
@@ -24,7 +25,7 @@ class ColorsConstants {
       case EnviromentEnum.staging:
         return const Color.fromARGB(255, 138, 118, 255);
       default:
-        return const Color.fromARGB(255, 243, 115, 190);
+        return Colors.black;
     }
   }
 
