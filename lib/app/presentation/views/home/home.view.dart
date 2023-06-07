@@ -15,12 +15,15 @@ class HomeView extends StatelessWidget {
       child: Scaffold(
         body: Center(
           child: BlocBuilder<PokemonBloc, PokemonState>(
+            buildWhen: (p, c) {
+              return p is PokemonLoadingState != c is PokemonLoadingState;
+            },
             builder: (BuildContext _, PokemonState state) {
               switch (state) {
                 case PokemonLoadingState():
                   return const Text('loading');
                 case PokemonLoadedState():
-                  return Text(state.list[0]);
+                  return Text(state.list.toString());
                 default:
                   return const Text('Some error');
               }
