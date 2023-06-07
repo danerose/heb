@@ -4,10 +4,11 @@ class SizeConfig {
   static MediaQueryData _media = const MediaQueryData();
   double sizeH = 0;
   double sizeV = 0;
-  static double _safeAreaHorizontal = 0;
-  static double _safeAreaVertical = 0;
   double safeHorizontal = 0;
   double safeVertical = 0;
+
+  double _safeAreaHorizontal = 0;
+  double _safeAreaVertical = 0;
 
   void init(BuildContext context) {
     _media = MediaQuery.of(context);
