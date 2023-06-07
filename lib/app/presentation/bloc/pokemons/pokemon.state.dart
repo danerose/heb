@@ -8,6 +8,10 @@ class PokemonLoadingState extends PokemonState {
 }
 
 class PokemonLoadedState extends PokemonState {
+  PokemonLoadedState(this.list);
+
+  final List<String> list;
+
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [list];
 }

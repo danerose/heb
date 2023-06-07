@@ -12,8 +12,7 @@ class PokemonBloc extends Bloc<PokemonEvent, PokemonState> {
     Emitter<PokemonState> emit,
   ) async {
     emit(PokemonLoadingState());
-    Future.delayed(const Duration(milliseconds: 1500)).then((_) {
-      emit(PokemonLoadedState());
-    });
+    await Future.delayed(const Duration(milliseconds: 1500));
+    emit(PokemonLoadedState(const []));
   }
 }
