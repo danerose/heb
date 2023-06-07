@@ -13,19 +13,19 @@ class SplashView extends StatefulWidget {
 
 class _SplashViewState extends State<SplashView> {
   @override
-  // void initState() {
-  //   Future.delayed(
-  //     const Duration(milliseconds: 1500),
-  //     () {
-  //       Navigator.pushNamedAndRemoveUntil(
-  //         context,
-  //         RoutesConstants.home,
-  //         (route) => false,
-  //       );
-  //     },
-  //   );
-  //   super.initState();
-  // }
+  void initState() {
+    Future.delayed(
+      const Duration(milliseconds: 1500),
+      () {
+        Navigator.pushNamedAndRemoveUntil(
+          context,
+          RoutesConstants.home,
+          (route) => false,
+        );
+      },
+    );
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
