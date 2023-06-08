@@ -8,8 +8,10 @@ import 'package:heb/app/domain/usecases/get_pokemon_list.usecase.dart';
 import 'package:heb/app/presentation/bloc/pokemons/pokemon.bloc.dart';
 import 'package:heb/app/presentation/bloc/pokemons/pokemon.state.dart';
 import 'package:heb/app/presentation/bloc/pokemons/pokemons.event.dart';
+import 'package:heb/app/presentation/components/atoms/icons/pokeball.icon.dart';
 
 import 'package:heb/app/presentation/components/organisms/list/pokemon.list.dart';
+import 'package:heb/core/extensions/localization.extension.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -22,7 +24,34 @@ class HomeView extends StatelessWidget {
         injector.get<GetPokemonDetailUsecase>(),
       )..add(PokemonLoadList()),
       child: Scaffold(
-        appBar: AppBar(),
+        appBar: AppBar(
+          title: Text(context.l10n.pokemonExchange),
+          actions: [
+            BlocBuilder<PokemonBloc, PokemonState>(
+              builder: (BuildContext context, PokemonState state) {
+                return Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: InkWell(
+                    onTap: () {},
+                    borderRadius: BorderRadius.circular(100),
+                    child: const Padding(
+                      padding: EdgeInsets.all(10.0),
+                      child: Badge(
+                        isLabelVisible: true,
+                        label: Text('2'),
+                        alignment: Alignment(-2.5, 2.5),
+                        child: PokeBallIcon(
+                          height: 30,
+                          width: 30,
+                        ),
+                      ),
+                    ),
+                  ),
+                );
+              },
+            )
+          ],
+        ),
         body: Center(
           child: BlocBuilder<PokemonBloc, PokemonState>(
             buildWhen: (p, c) {
