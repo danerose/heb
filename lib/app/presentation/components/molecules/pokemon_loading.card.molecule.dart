@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:heb/app/injector.dart';
-import 'package:heb/core/config/size/size.config.dart';
 import 'package:skeletons/skeletons.dart';
+
+import 'package:heb/core/config/size/size.config.dart';
 
 class PokemonLoadingCardMolecule extends StatelessWidget {
   const PokemonLoadingCardMolecule({super.key});

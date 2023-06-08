@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
-import 'package:heb/app/domain/entities/pokemon/pokemon_detail.entity.dart';
 import 'package:heb/core/utils/validators.util.dart';
+
+import 'package:heb/app/domain/entities/pokemon/pokemon_detail.entity.dart';
 import 'package:heb/app/domain/entities/pokemon/pokemon.entity.dart';
 
 class PokemonModel extends Equatable {

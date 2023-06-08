@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:heb/app/injector.dart';
+
 import 'package:heb/core/config/size/size.config.dart';
 import 'package:heb/core/constants/routes.constants.dart';
 

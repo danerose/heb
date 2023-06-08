@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:heb/app/domain/entities/pokemon/pokemon.entity.dart';
 import 'package:heb/app/injector.dart';
-import 'package:heb/app/presentation/components/atoms/images/image.atom.dart';
+
 import 'package:heb/core/config/size/size.config.dart';
 import 'package:heb/core/extensions/localization.extension.dart';
+
+import 'package:heb/app/domain/entities/pokemon/pokemon.entity.dart';
+
+import 'package:heb/app/presentation/components/atoms/images/image.atom.dart';
 
 class PokemonTeamDialogOrganism extends StatelessWidget {
   const PokemonTeamDialogOrganism({

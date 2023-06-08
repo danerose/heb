@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:heb/core/constants/colors.constants.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+
+import 'package:heb/core/constants/colors.constants.dart';
 
 class ImageMolecule extends StatelessWidget {
   final String url;

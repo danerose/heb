@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
+import 'package:heb/core/extensions/localization.extension.dart';
+
 import 'package:heb/app/domain/entities/pokemon/pokemon.entity.dart';
 
 import 'package:heb/app/presentation/components/molecules/pokemon.card.molecule.dart';
 import 'package:heb/app/presentation/components/molecules/pokemon_loading.card.molecule.dart';
-import 'package:heb/core/extensions/localization.extension.dart';
 
 class PokemonListOrganism extends StatelessWidget {
   const PokemonListOrganism({

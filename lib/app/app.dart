@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'package:heb/core/config/theme/theme.dart';
 import 'package:heb/core/config/routes/routes.dart';
-
 import 'package:heb/core/constants/routes.constants.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class App extends StatelessWidget {
   const App({super.key});

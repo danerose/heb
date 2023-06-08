@@ -1,8 +1,10 @@
 import 'package:equatable/equatable.dart';
+import 'package:heb/core/utils/validators.util.dart';
+
 import 'package:heb/app/data/models/pokemon/pokemon.model.dart';
+
 import 'package:heb/app/domain/entities/pokemon/pokemon.entity.dart';
 import 'package:heb/app/domain/entities/pokemon_response.entity.dart';
-import 'package:heb/core/utils/validators.util.dart';
 
 class PokemonResponseModel extends Equatable {
   final int count;

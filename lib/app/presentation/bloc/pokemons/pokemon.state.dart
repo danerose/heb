@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+
 import 'package:heb/app/domain/entities/pokemon/pokemon.entity.dart';
 
 class PokemonState extends Equatable {

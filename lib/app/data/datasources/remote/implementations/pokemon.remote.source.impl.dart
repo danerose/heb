@@ -1,7 +1,9 @@
-import 'package:heb/app/data/models/pokemon_detail_response.model.dart';
 import 'package:heb/core/services/network/http.service.dart';
 import 'package:heb/core/constants/pokemon_api.constants.dart';
+
 import 'package:heb/app/data/models/pokemon_response.model.dart';
+import 'package:heb/app/data/models/pokemon_detail_response.model.dart';
+
 import 'package:heb/app/data/datasources/remote/interfaces/pokemon.remote.source.dart';
 
 class PokemonRemoteSourceImpl implements PokemonRemoteSource {

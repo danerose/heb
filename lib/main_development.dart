@@ -2,11 +2,10 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'app/injector.dart';
+import 'package:heb/app/app.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
-
-import 'package:heb/app/app.dart';
 
 import 'package:heb/core/enviroment/env.dev.dart';
 

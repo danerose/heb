@@ -1,7 +1,8 @@
 import 'package:equatable/equatable.dart';
-import 'package:heb/app/data/models/types/type_detail.model.dart';
 import 'package:heb/core/utils/validators.util.dart';
+
 import 'package:heb/app/domain/entities/types/type.entity.dart';
+import 'package:heb/app/data/models/types/type_detail.model.dart';
 
 class TypeModel extends Equatable {
   const TypeModel({

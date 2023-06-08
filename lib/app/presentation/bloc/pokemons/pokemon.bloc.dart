@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:heb/core/exceptions/custom.exceptions.dart';
 
 import 'package:heb/app/domain/entities/pokemon/pokemon.entity.dart';
