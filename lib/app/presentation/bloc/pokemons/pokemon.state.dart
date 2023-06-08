@@ -1,21 +1,29 @@
 import 'package:equatable/equatable.dart';
 import 'package:heb/app/domain/entities/pokemon/pokemon.entity.dart';
 
-sealed class PokemonState extends Equatable {}
+class PokemonState extends Equatable {
+  const PokemonState({
+    this.loading = false,
+    this.team = const [],
+    this.list = const [],
+  });
 
-class PokemonLoadingState extends PokemonState {
-  @override
-  List<Object?> get props => [];
-}
-
-class PokemonLoadedState extends PokemonState {
-  PokemonLoadedState(this.list);
+  final bool loading;
+  final List<Pokemon> team;
   final List<Pokemon> list;
-  @override
-  List<Object?> get props => [list];
-}
 
-class PokemonErrorState extends PokemonState {
+  PokemonState copyWith({
+    bool? loading,
+    List<Pokemon>? team,
+    List<Pokemon>? list,
+  }) {
+    return PokemonState(
+      loading: loading ?? this.loading,
+      team: team ?? this.team,
+      list: list ?? this.list,
+    );
+  }
+
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [loading, team, list];
 }

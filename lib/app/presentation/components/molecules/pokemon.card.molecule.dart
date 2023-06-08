@@ -10,9 +10,11 @@ class PokemonCardMolecule extends StatelessWidget {
   const PokemonCardMolecule({
     super.key,
     required this.pokemon,
+    required this.add,
   });
 
   final Pokemon pokemon;
+  final Function(Pokemon pokemon) add;
 
   @override
   Widget build(BuildContext context) {
@@ -76,7 +78,7 @@ class PokemonCardMolecule extends StatelessWidget {
               child: SizedBox(
                 width: injector.get<SizeConfig>().sizeH * 100,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () => add(pokemon),
                   child: Text(context.l10n.addToMyTeam),
                 ),
               ),

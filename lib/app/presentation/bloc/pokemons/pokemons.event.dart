@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:heb/app/domain/entities/pokemon/pokemon.entity.dart';
 
 @immutable
 abstract class PokemonEvent extends Equatable {
@@ -9,4 +10,11 @@ abstract class PokemonEvent extends Equatable {
 class PokemonLoadList extends PokemonEvent {
   @override
   List<Object?> get props => [];
+}
+
+class PokemonAddToTeam extends PokemonEvent {
+  const PokemonAddToTeam({required this.pokemon});
+  final Pokemon pokemon;
+  @override
+  List<Object?> get props => [pokemon];
 }

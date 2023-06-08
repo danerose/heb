@@ -19,19 +19,20 @@ class PokemonBloc extends Bloc<PokemonEvent, PokemonState> {
   PokemonBloc(
     this._getPokemonList,
     this._getPokemonDetail,
-  ) : super(PokemonLoadingState()) {
+  ) : super(const PokemonState()) {
     on<PokemonLoadList>(_onLoad);
+    on<PokemonAddToTeam>(_onAddToTeam);
   }
 
   Future<void> _onLoad(
     PokemonLoadList event,
     Emitter<PokemonState> emit,
   ) async {
-    emit(PokemonLoadingState());
+    emit(state.copyWith(loading: true));
     final res = await _getPokemonList.execute();
     late List<Pokemon> list = [];
     res.fold(
-      (CustomException l) => emit(PokemonErrorState()),
+      (CustomException l) => list = [],
       (PokemonResponse r) => list = r.results,
     );
     final d = await Future.wait<Either<CustomException, PokemonDetailResponse>>(
@@ -43,9 +44,16 @@ class PokemonBloc extends Bloc<PokemonEvent, PokemonState> {
           (l) => const PokemonDetail.empty(),
           (r) => PokemonDetail(sprite: r.sprite, type: r.types),
         ),
-        loading: false,
       );
-      emit(PokemonLoadedState(list));
     }
+    emit(state.copyWith(loading: false, list: list));
+  }
+
+  void _onAddToTeam(
+    PokemonAddToTeam event,
+    Emitter<PokemonState> emit,
+  ) {
+    List<Pokemon> team = state.team;
+    emit(state.copyWith(team: [event.pokemon, ...team]));
   }
 }

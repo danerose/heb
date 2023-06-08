@@ -24,7 +24,6 @@ class PokemonModel extends Equatable {
       name: name,
       url: url,
       detail: const PokemonDetail.empty(),
-      loading: true,
     );
   }
 

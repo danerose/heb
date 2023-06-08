@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+
 import 'package:heb/app/domain/entities/pokemon/pokemon.entity.dart';
+
 import 'package:heb/app/presentation/components/molecules/pokemon.card.molecule.dart';
 import 'package:heb/app/presentation/components/molecules/pokemon_loading.card.molecule.dart';
 
@@ -9,11 +11,13 @@ class PokemonListOrganism extends StatelessWidget {
     this.count = 10,
     required this.loading,
     required this.list,
+    required this.add,
   });
 
   final bool loading;
   final int count;
   final List<Pokemon> list;
+  final Function(Pokemon pokemon) add;
 
   @override
   Widget build(BuildContext context) {
@@ -28,11 +32,10 @@ class PokemonListOrganism extends StatelessWidget {
       return ListView.builder(
         itemCount: list.length,
         itemBuilder: (BuildContext _, int index) {
-          if (list[index].loading) {
-            return const PokemonLoadingCardMolecule();
-          } else {
-            return PokemonCardMolecule(pokemon: list[index]);
-          }
+          return PokemonCardMolecule(
+            pokemon: list[index],
+            add: (pokemon) => add(pokemon),
+          );
         },
       );
     }
