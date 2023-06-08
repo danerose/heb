@@ -12,10 +12,12 @@ class PokemonRemoteSourceImpl implements PokemonRemoteSource {
   });
 
   @override
-  Future<PokemonResponseModel> getPokemons() async {
+  Future<PokemonResponseModel> getPokemons({required String next}) async {
     try {
       final res = await httpService.get(
-        PokemonApiConstants.pokemon,
+        next.isEmpty
+            ? PokemonApiConstants.pokemon
+            : PokemonApiConstants.pokemonNext(next),
       );
       return PokemonResponseModel.fromJson(res.data);
     } catch (e) {

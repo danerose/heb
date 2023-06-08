@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:dartz/dartz.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:heb/core/exceptions/custom.exceptions.dart';
@@ -31,13 +29,14 @@ class PokemonBloc extends Bloc<PokemonEvent, PokemonState> {
     PokemonLoadList event,
     Emitter<PokemonState> emit,
   ) async {
-    emit(state.copyWith(loading: true));
-    final res = await _getPokemonList.execute();
+    emit(state.copyWith(loading: !event.more, loadingMore: event.more));
+    final res = await _getPokemonList.execute(next: state.next);
     late List<Pokemon> list = [];
-    res.fold(
-      (CustomException l) => list = [],
-      (PokemonResponse r) => list = r.results,
-    );
+    late String next = '';
+    res.fold((CustomException l) => list = [], (PokemonResponse r) {
+      list = r.results;
+      next = r.next;
+    });
     final d = await Future.wait<Either<CustomException, PokemonDetailResponse>>(
       List.from(list.map((e) => _getPokemonDetail.execute(url: e.url))),
     );
@@ -49,7 +48,12 @@ class PokemonBloc extends Bloc<PokemonEvent, PokemonState> {
         ),
       );
     }
-    emit(state.copyWith(loading: false, list: list));
+    emit(state.copyWith(
+      loading: false,
+      loadingMore: false,
+      next: next,
+      list: [...state.list, ...list],
+    ));
   }
 
   void _onAddToTeam(
@@ -73,7 +77,6 @@ class PokemonBloc extends Bloc<PokemonEvent, PokemonState> {
     final list = state.list;
     final index = list.indexWhere((e) => e.name == event.pokemon.name);
     list[index] = pokemon;
-
     emit(state.copyWith(
       team: team.where((e) => e.name != event.pokemon.name).toList(),
       list: list,

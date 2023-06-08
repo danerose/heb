@@ -11,9 +11,11 @@ class PokemonRepositoryImpl implements PokemonRepository {
   const PokemonRepositoryImpl({required this.pokemonRemoteSource});
 
   @override
-  Future<Either<CustomException, PokemonResponse>> getPokemons() async {
+  Future<Either<CustomException, PokemonResponse>> getPokemons({
+    required String next,
+  }) async {
     try {
-      final res = await pokemonRemoteSource.getPokemons();
+      final res = await pokemonRemoteSource.getPokemons(next: next);
       return Right(res.toEntity());
     } on CustomException catch (e) {
       return Left(e);

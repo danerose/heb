@@ -8,7 +8,9 @@ class GetPokemonListUsecase {
 
   GetPokemonListUsecase({required this.pokemonRepository});
 
-  Future<Either<CustomException, PokemonResponse>> execute() async {
-    return await pokemonRepository.getPokemons();
+  Future<Either<CustomException, PokemonResponse>> execute({
+    required String next,
+  }) async {
+    return await pokemonRepository.getPokemons(next: next);
   }
 }

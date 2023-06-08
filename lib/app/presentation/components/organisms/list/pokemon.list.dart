@@ -12,17 +12,21 @@ class PokemonListOrganism extends StatelessWidget {
     this.count = 10,
     required this.next,
     required this.loading,
+    required this.loadingMore,
     required this.list,
     required this.team,
     required this.add,
+    required this.loadMore,
   });
 
   final bool loading;
+  final bool loadingMore;
   final int count;
   final String next;
   final List<Pokemon> list;
   final List<Pokemon> team;
   final Function(Pokemon pokemon) add;
+  final Function() loadMore;
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +41,6 @@ class PokemonListOrganism extends StatelessWidget {
       return ListView.builder(
         itemCount: list.length + 1,
         itemBuilder: (BuildContext _, int index) {
-          // return Text('index $index lenght ${list.length}');
           if (index < list.length) {
             return PokemonCardMolecule(
               pokemon: list[index],
@@ -47,9 +50,20 @@ class PokemonListOrganism extends StatelessWidget {
           } else {
             return Visibility(
               visible: next.isNotEmpty,
-              child: TextButton(
-                onPressed: () {},
-                child: Text(context.l10n.loadMore),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextButton(
+                  onPressed: loadingMore ? null : loadMore,
+                  child: Visibility(
+                    visible: !loadingMore,
+                    replacement: const SizedBox(
+                      height: 20,
+                      width: 20,
+                      child: CircularProgressIndicator(strokeWidth: 2),
+                    ),
+                    child: Text(context.l10n.loadMore),
+                  ),
+                ),
               ),
             );
           }

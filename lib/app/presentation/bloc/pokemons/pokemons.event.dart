@@ -4,24 +4,21 @@ import 'package:heb/app/domain/entities/pokemon/pokemon.entity.dart';
 
 @immutable
 abstract class PokemonEvent extends Equatable {
-  const PokemonEvent();
-}
-
-class PokemonLoadList extends PokemonEvent {
   @override
   List<Object?> get props => [];
 }
 
+class PokemonLoadList extends PokemonEvent {
+  PokemonLoadList({required this.more});
+  final bool more;
+}
+
 class PokemonAddToTeam extends PokemonEvent {
-  const PokemonAddToTeam({required this.pokemon});
+  PokemonAddToTeam({required this.pokemon});
   final Pokemon pokemon;
-  @override
-  List<Object?> get props => [pokemon];
 }
 
 class PokemonDelteFromTeam extends PokemonEvent {
-  const PokemonDelteFromTeam({required this.pokemon});
+  PokemonDelteFromTeam({required this.pokemon});
   final Pokemon pokemon;
-  @override
-  List<Object?> get props => [pokemon];
 }

@@ -24,7 +24,7 @@ class HomeView extends StatelessWidget {
       create: (_) => PokemonBloc(
         injector.get<GetPokemonListUsecase>(),
         injector.get<GetPokemonDetailUsecase>(),
-      )..add(PokemonLoadList()),
+      )..add(PokemonLoadList(more: false)),
       child: Scaffold(
         appBar: AppBar(
           title: Text(context.l10n.pokemonExchange),
@@ -80,6 +80,7 @@ class HomeView extends StatelessWidget {
                 Expanded(
                   child: PokemonListOrganism(
                     loading: state.loading,
+                    loadingMore: state.loadingMore,
                     list: state.list,
                     team: state.team,
                     next: state.next,
@@ -89,6 +90,11 @@ class HomeView extends StatelessWidget {
                             .read<PokemonBloc>()
                             .add(PokemonAddToTeam(pokemon: pokemon));
                       }
+                    },
+                    loadMore: () {
+                      context
+                          .read<PokemonBloc>()
+                          .add(PokemonLoadList(more: true));
                     },
                   ),
                 ),
