@@ -26,7 +26,7 @@ class PokemonCardMolecule extends StatelessWidget {
             Row(
               children: [
                 ImageMolecule(
-                  url: '',
+                  url: pokemon.detail.sprite.front,
                   width: injector.get<SizeConfig>().sizeH * 20,
                   height: injector.get<SizeConfig>().sizeH * 20,
                   borderRadius: BorderRadius.circular(10),
@@ -41,12 +41,25 @@ class PokemonCardMolecule extends StatelessWidget {
                     children: [
                       Text(pokemon.name.toCapitalize()),
                       const SizedBox(height: 10),
-                      Row(
-                        children: [
-                          const Chip(label: Text('Poison')),
-                          const SizedBox(width: 10),
-                          const Chip(label: Text('Seef')),
-                        ],
+                      SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                          children: List.generate(
+                            pokemon.detail.type.length,
+                            (i) {
+                              return Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 5,
+                                ),
+                                child: Chip(
+                                  label: Text(
+                                    pokemon.detail.type[i].detail.name,
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        ),
                       ),
                     ],
                   ),
