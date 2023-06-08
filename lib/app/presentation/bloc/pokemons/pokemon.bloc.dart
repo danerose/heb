@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dartz/dartz.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:heb/core/exceptions/custom.exceptions.dart';
@@ -54,6 +56,11 @@ class PokemonBloc extends Bloc<PokemonEvent, PokemonState> {
     Emitter<PokemonState> emit,
   ) {
     List<Pokemon> team = state.team;
-    emit(state.copyWith(team: [event.pokemon, ...team]));
+    Pokemon pokemon = event.pokemon.copyWith(onTeam: true);
+    final list = state.list;
+    final index = list.indexWhere((e) => e.name == event.pokemon.name);
+    list[index] = pokemon;
+    log('Pokemono $pokemon');
+    emit(state.copyWith(team: [pokemon, ...team], list: list));
   }
 }

@@ -11,8 +11,8 @@ import 'package:heb/app/presentation/bloc/pokemons/pokemon.bloc.dart';
 import 'package:heb/app/presentation/bloc/pokemons/pokemon.state.dart';
 import 'package:heb/app/presentation/bloc/pokemons/pokemons.event.dart';
 
-import 'package:heb/app/presentation/components/atoms/icons/pokeball.icon.dart';
 import 'package:heb/app/presentation/components/organisms/list/pokemon.list.dart';
+import 'package:heb/app/presentation/components/molecules/pokemon_team_count.icon.molecule.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -31,24 +31,9 @@ class HomeView extends StatelessWidget {
             BlocBuilder<PokemonBloc, PokemonState>(
               buildWhen: (p, c) => p.team != c.team,
               builder: (BuildContext context, PokemonState state) {
-                return Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: InkWell(
-                    onTap: () {},
-                    borderRadius: BorderRadius.circular(100),
-                    child: Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Badge(
-                        isLabelVisible: state.team.isNotEmpty,
-                        label: Text(state.team.length.toString()),
-                        alignment: const Alignment(-2.5, 2.5),
-                        child: const PokeBallIcon(
-                          height: 30,
-                          width: 30,
-                        ),
-                      ),
-                    ),
-                  ),
+                return PokemonTeamCountIconMolecule(
+                  team: state.team,
+                  onTap: () {},
                 );
               },
             )
@@ -57,16 +42,34 @@ class HomeView extends StatelessWidget {
         body: Center(
           child: BlocBuilder<PokemonBloc, PokemonState>(
             builder: (BuildContext context, PokemonState state) {
-              return PokemonListOrganism(
-                loading: state.loading,
-                list: state.list,
-                add: (pokemon) {
-                  if (state.team.length < 5) {
-                    context
-                        .read<PokemonBloc>()
-                        .add(PokemonAddToTeam(pokemon: pokemon));
-                  }
-                },
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 20,
+                      vertical: 10,
+                    ),
+                    child: Text(
+                      context.l10n.selectUpToPokemon,
+                      style: Theme.of(context).textTheme.bodySmall,
+                    ),
+                  ),
+                  Expanded(
+                    child: PokemonListOrganism(
+                      loading: state.loading,
+                      list: state.list,
+                      team: state.team,
+                      add: (pokemon) {
+                        if (state.team.length < 5) {
+                          context
+                              .read<PokemonBloc>()
+                              .add(PokemonAddToTeam(pokemon: pokemon));
+                        }
+                      },
+                    ),
+                  ),
+                ],
               );
             },
           ),

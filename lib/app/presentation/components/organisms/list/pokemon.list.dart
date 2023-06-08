@@ -11,12 +11,14 @@ class PokemonListOrganism extends StatelessWidget {
     this.count = 10,
     required this.loading,
     required this.list,
+    required this.team,
     required this.add,
   });
 
   final bool loading;
   final int count;
   final List<Pokemon> list;
+  final List<Pokemon> team;
   final Function(Pokemon pokemon) add;
 
   @override
@@ -34,6 +36,7 @@ class PokemonListOrganism extends StatelessWidget {
         itemBuilder: (BuildContext _, int index) {
           return PokemonCardMolecule(
             pokemon: list[index],
+            allowToAdd: team.length < 5,
             add: (pokemon) => add(pokemon),
           );
         },

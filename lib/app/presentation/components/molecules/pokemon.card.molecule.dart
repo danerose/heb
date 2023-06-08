@@ -1,19 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:heb/app/domain/entities/pokemon/pokemon.entity.dart';
 import 'package:heb/app/injector.dart';
-import 'package:heb/app/presentation/components/atoms/images/image.atom.dart';
 import 'package:heb/core/config/size/size.config.dart';
 import 'package:heb/core/extensions/localization.extension.dart';
 import 'package:heb/core/extensions/text.extension.dart';
+
+import 'package:heb/app/domain/entities/pokemon/pokemon.entity.dart';
+
+import 'package:heb/app/presentation/components/atoms/images/image.atom.dart';
 
 class PokemonCardMolecule extends StatelessWidget {
   const PokemonCardMolecule({
     super.key,
     required this.pokemon,
+    required this.allowToAdd,
     required this.add,
   });
 
   final Pokemon pokemon;
+  final bool allowToAdd;
   final Function(Pokemon pokemon) add;
 
   @override
@@ -77,9 +81,20 @@ class PokemonCardMolecule extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
               child: SizedBox(
                 width: injector.get<SizeConfig>().sizeH * 100,
-                child: ElevatedButton(
-                  onPressed: () => add(pokemon),
-                  child: Text(context.l10n.addToMyTeam),
+                child: Visibility(
+                  visible: allowToAdd,
+                  replacement: ElevatedButton(
+                    onPressed: null,
+                    child: Text(context.l10n.yourTeamIsComplete),
+                  ),
+                  child: ElevatedButton(
+                    onPressed: pokemon.onTeam ? null : () => add(pokemon),
+                    child: Text(
+                      pokemon.onTeam
+                          ? context.l10n.alreadyPartOfYuorTeam
+                          : context.l10n.addToMyTeam,
+                    ),
+                  ),
                 ),
               ),
             ),
