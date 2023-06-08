@@ -24,6 +24,7 @@ class PokemonBloc extends Bloc<PokemonEvent, PokemonState> {
   ) : super(const PokemonState()) {
     on<PokemonLoadList>(_onLoad);
     on<PokemonAddToTeam>(_onAddToTeam);
+    on<PokemonDelteFromTeam>(_onDeleteFromTeam);
   }
 
   Future<void> _onLoad(
@@ -60,7 +61,22 @@ class PokemonBloc extends Bloc<PokemonEvent, PokemonState> {
     final list = state.list;
     final index = list.indexWhere((e) => e.name == event.pokemon.name);
     list[index] = pokemon;
-    log('Pokemono $pokemon');
     emit(state.copyWith(team: [pokemon, ...team], list: list));
+  }
+
+  void _onDeleteFromTeam(
+    PokemonDelteFromTeam event,
+    Emitter<PokemonState> emit,
+  ) {
+    List<Pokemon> team = state.team;
+    Pokemon pokemon = event.pokemon.copyWith(onTeam: false);
+    final list = state.list;
+    final index = list.indexWhere((e) => e.name == event.pokemon.name);
+    list[index] = pokemon;
+
+    emit(state.copyWith(
+      team: team.where((e) => e.name != event.pokemon.name).toList(),
+      list: list,
+    ));
   }
 }

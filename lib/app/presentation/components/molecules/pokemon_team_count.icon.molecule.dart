@@ -10,14 +10,14 @@ class PokemonTeamCountIconMolecule extends StatelessWidget {
   });
 
   final List<Pokemon> team;
-  final Function() onTap;
+  final Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: InkWell(
-        onTap: () {},
+        onTap: onTap,
         borderRadius: BorderRadius.circular(100),
         child: Padding(
           padding: const EdgeInsets.all(10.0),

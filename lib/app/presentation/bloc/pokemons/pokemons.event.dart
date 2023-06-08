@@ -18,3 +18,10 @@ class PokemonAddToTeam extends PokemonEvent {
   @override
   List<Object?> get props => [pokemon];
 }
+
+class PokemonDelteFromTeam extends PokemonEvent {
+  const PokemonDelteFromTeam({required this.pokemon});
+  final Pokemon pokemon;
+  @override
+  List<Object?> get props => [pokemon];
+}

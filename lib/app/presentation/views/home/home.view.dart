@@ -1,7 +1,10 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:heb/app/injector.dart';
+import 'package:heb/app/presentation/components/organisms/dialogs/pokemon_team.dialog.organism.dart';
 import 'package:heb/core/extensions/localization.extension.dart';
 
 import 'package:heb/app/domain/usecases/get_pokemon_list.usecase.dart';
@@ -31,9 +34,31 @@ class HomeView extends StatelessWidget {
             BlocBuilder<PokemonBloc, PokemonState>(
               buildWhen: (p, c) => p.team != c.team,
               builder: (BuildContext context, PokemonState state) {
+                final bloc = BlocProvider.of<PokemonBloc>(context);
                 return PokemonTeamCountIconMolecule(
                   team: state.team,
-                  onTap: () {},
+                  onTap: state.team.isEmpty
+                      ? null
+                      : () async {
+                          await showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return BlocBuilder<PokemonBloc, PokemonState>(
+                                bloc: bloc,
+                                builder: (_, __) {
+                                  return PokemonTeamDialogOrganism(
+                                    team: bloc.state.team,
+                                    onDelete: (pokemon) {
+                                      bloc.add(
+                                        PokemonDelteFromTeam(pokemon: pokemon),
+                                      );
+                                    },
+                                  );
+                                },
+                              );
+                            },
+                          );
+                        },
                 );
               },
             )
