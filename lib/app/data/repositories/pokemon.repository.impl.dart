@@ -27,7 +27,7 @@ class PokemonRepositoryImpl implements PokemonRepository {
     required String url,
   }) async {
     try {
-      final res = await pokemonRemoteSource.getPokemons();
+      final res = await pokemonRemoteSource.getPokemonDetail(url: url);
       return Right(res.toEntity());
     } on CustomException catch (e) {
       return Left(e);
