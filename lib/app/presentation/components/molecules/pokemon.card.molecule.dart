@@ -3,6 +3,7 @@ import 'package:heb/app/domain/entities/pokemon/pokemon.entity.dart';
 import 'package:heb/app/injector.dart';
 import 'package:heb/app/presentation/components/atoms/image.atom.dart';
 import 'package:heb/core/config/size/size.config.dart';
+import 'package:heb/core/extensions/localization.extension.dart';
 import 'package:heb/core/extensions/text.extension.dart';
 
 class PokemonCardMolecule extends StatelessWidget {
@@ -71,7 +72,7 @@ class PokemonCardMolecule extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
               child: ElevatedButton(
                 onPressed: () {},
-                child: Text('xxxxxxxxxxxxxx'),
+                child: Text(context.l10n.appTitle),
               ),
             ),
           ],

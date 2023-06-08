@@ -1,5 +1,12 @@
 {
     "appTitle": "Pokemon",
+    "pokemonExchange": "Pokemon Exchange",
+    "selectUpToPokemon": "Select up to 5 Pokémon to add to your team.",
     "hello": "Hello",
-    "splashScreenForDemostration": "This screen is only for demostration porpuses."
+    "splashScreenForDemostration": "This screen is only for demostration porpuses.",
+    "close": "Close",
+    "addToMyTeam": "Add to my Team",
+    "deleteFromMyTeam": "Delete from My Team",
+    "alreadyPartOfYuorTeam": "Already part of your Team",
+    "yourTeamIsComplete": "Your team is Complete"
 }
