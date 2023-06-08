@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:heb/app/domain/entities/pokemon/pokemon.entity.dart';
+import 'package:heb/app/domain/usecases/get_pokemon_detail.usecase.dart';
 import 'package:heb/core/exceptions/custom.exceptions.dart';
 
 import 'package:heb/app/domain/entities/pokemon_response.entity.dart';
@@ -10,7 +11,11 @@ import 'package:heb/app/presentation/bloc/pokemons/pokemons.event.dart';
 
 class PokemonBloc extends Bloc<PokemonEvent, PokemonState> {
   final GetPokemonListUsecase _getPokemonList;
-  PokemonBloc(this._getPokemonList) : super(PokemonLoadingState()) {
+  final GetPokemonDetailUsecase _getPokemonDetail;
+  PokemonBloc(
+    this._getPokemonList,
+    this._getPokemonDetail,
+  ) : super(PokemonLoadingState()) {
     on<PokemonLoadList>(_onLoad);
   }
 

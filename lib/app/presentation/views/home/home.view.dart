@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:heb/app/domain/usecases/get_pokemon_detail.usecase.dart';
 import 'package:heb/app/injector.dart';
 
 import 'package:heb/app/domain/usecases/get_pokemon_list.usecase.dart';
@@ -18,6 +19,7 @@ class HomeView extends StatelessWidget {
     return BlocProvider<PokemonBloc>(
       create: (_) => PokemonBloc(
         injector.get<GetPokemonListUsecase>(),
+        injector.get<GetPokemonDetailUsecase>(),
       )..add(PokemonLoadList()),
       child: Scaffold(
         appBar: AppBar(),
