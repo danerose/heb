@@ -53,7 +53,9 @@ class PokemonCardMolecule extends StatelessWidget {
                                   horizontal: 5,
                                 ),
                                 child: Chip(
-                                  backgroundColor: Colors.amber,
+                                  backgroundColor: pokemon
+                                      .detail.type[i].detail.name
+                                      .toTypeColor(),
                                   label: Text(
                                     pokemon.detail.type[i].detail.name,
                                   ),
