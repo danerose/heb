@@ -1,0 +1,14 @@
+{
+    "appTitle": "Pokemon",
+    "pokemonExchange": "Intercambio Pokémon",
+    "selectUpToPokemon": "Selecciona hasta 5 pokemons para añadirlos a tu Equipo",
+    "hello": "Hola",
+    "splashScreenForDemostration": "Esta pantalla es solo para demostración.",
+    "close": "Cerrar",
+    "loadMore": "Cargar Más",
+    "addToMyTeam": "Agregar a mi Equipo",
+    "deleteFromMyTeam": "Eliminar de tu Equipo",
+    "alreadyPartOfYuorTeam": "Ya es parte de tu Equipo",
+    "yourTeamIsComplete": "Tu Equipo está completo",
+    "yourTeamIsEmpty": "Tu Equipo esta vacío"
+}

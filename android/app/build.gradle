@@ -54,6 +54,26 @@ android {
         versionName flutterVersionName
     }
 
+    flavorDimensions "default"
+
+    productFlavors { 
+        production {
+            dimension "default"
+            applicationIdSuffix ""
+            manifestPlaceholders = [appLabel: "Pokemon"]
+        }
+        staging {
+            dimension "default"
+            applicationIdSuffix ".stg"
+            manifestPlaceholders = [appLabel: "[STG] Pokemon"]
+        }
+        development {
+            dimension "default"
+            applicationIdSuffix ".dev"
+            manifestPlaceholders = [appLabel: "[DEV] Pokemon"]
+        }
+    }
+
     buildTypes {
         release {
             // TODO: Add your own signing config for the release build.
