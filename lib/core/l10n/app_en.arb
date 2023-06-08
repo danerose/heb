@@ -8,5 +8,6 @@
     "addToMyTeam": "Add to my Team",
     "deleteFromMyTeam": "Delete from My Team",
     "alreadyPartOfYuorTeam": "Already part of your Team",
-    "yourTeamIsComplete": "Your team is Complete"
+    "yourTeamIsComplete": "Your team is Complete",
+    "yourTeamIsEmpty": "Your team is Empty"
 }
