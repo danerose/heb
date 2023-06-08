@@ -53,6 +53,7 @@ class PokemonCardMolecule extends StatelessWidget {
                                   horizontal: 5,
                                 ),
                                 child: Chip(
+                                  backgroundColor: Colors.amber,
                                   label: Text(
                                     pokemon.detail.type[i].detail.name,
                                   ),
@@ -70,9 +71,12 @@ class PokemonCardMolecule extends StatelessWidget {
             const SizedBox(height: 20),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-              child: ElevatedButton(
-                onPressed: () {},
-                child: Text(context.l10n.appTitle),
+              child: SizedBox(
+                width: injector.get<SizeConfig>().sizeH * 100,
+                child: ElevatedButton(
+                  onPressed: () {},
+                  child: Text(context.l10n.addToMyTeam),
+                ),
               ),
             ),
           ],
