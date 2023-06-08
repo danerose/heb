@@ -1,10 +1,7 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:heb/app/injector.dart';
-import 'package:heb/app/presentation/components/organisms/dialogs/pokemon_team.dialog.organism.dart';
 import 'package:heb/core/extensions/localization.extension.dart';
 
 import 'package:heb/app/domain/usecases/get_pokemon_list.usecase.dart';
@@ -16,6 +13,7 @@ import 'package:heb/app/presentation/bloc/pokemons/pokemons.event.dart';
 
 import 'package:heb/app/presentation/components/organisms/list/pokemon.list.dart';
 import 'package:heb/app/presentation/components/molecules/pokemon_team_count.icon.molecule.dart';
+import 'package:heb/app/presentation/components/organisms/dialogs/pokemon_team.dialog.organism.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -45,7 +43,7 @@ class HomeView extends StatelessWidget {
                             builder: (BuildContext context) {
                               return BlocBuilder<PokemonBloc, PokemonState>(
                                 bloc: bloc,
-                                builder: (_, __) {
+                                builder: (BuildContext _, PokemonState s) {
                                   return PokemonTeamDialogOrganism(
                                     team: bloc.state.team,
                                     onDelete: (pokemon) {
@@ -64,40 +62,39 @@ class HomeView extends StatelessWidget {
             )
           ],
         ),
-        body: Center(
-          child: BlocBuilder<PokemonBloc, PokemonState>(
-            builder: (BuildContext context, PokemonState state) {
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 20,
-                      vertical: 10,
-                    ),
-                    child: Text(
-                      context.l10n.selectUpToPokemon,
-                      style: Theme.of(context).textTheme.bodySmall,
-                    ),
+        body: BlocBuilder<PokemonBloc, PokemonState>(
+          builder: (BuildContext context, PokemonState state) {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 20,
+                    vertical: 10,
                   ),
-                  Expanded(
-                    child: PokemonListOrganism(
-                      loading: state.loading,
-                      list: state.list,
-                      team: state.team,
-                      add: (pokemon) {
-                        if (state.team.length < 5) {
-                          context
-                              .read<PokemonBloc>()
-                              .add(PokemonAddToTeam(pokemon: pokemon));
-                        }
-                      },
-                    ),
+                  child: Text(
+                    context.l10n.selectUpToPokemon,
+                    style: Theme.of(context).textTheme.bodySmall,
                   ),
-                ],
-              );
-            },
-          ),
+                ),
+                Expanded(
+                  child: PokemonListOrganism(
+                    loading: state.loading,
+                    list: state.list,
+                    team: state.team,
+                    next: state.next,
+                    add: (pokemon) {
+                      if (state.team.length < 5) {
+                        context
+                            .read<PokemonBloc>()
+                            .add(PokemonAddToTeam(pokemon: pokemon));
+                      }
+                    },
+                  ),
+                ),
+              ],
+            );
+          },
         ),
       ),
     );
