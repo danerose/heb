@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:heb/app/injector.dart';
+import 'package:heb/core/config/size/size.config.dart';
 import 'package:heb/core/constants/routes.constants.dart';
 
 import 'package:heb/app/presentation/views/home/home.view.dart';
@@ -11,6 +13,7 @@ class RouteGenerator {
         return MaterialPageRoute(
           settings: const RouteSettings(name: RoutesConstants.initial),
           builder: (BuildContext context) {
+            injector<SizeConfig>().init(context);
             return const SplashView();
           },
         );
@@ -18,6 +21,7 @@ class RouteGenerator {
         return MaterialPageRoute(
           settings: const RouteSettings(name: RoutesConstants.home),
           builder: (BuildContext context) {
+            injector<SizeConfig>().init(context);
             return const HomeView();
           },
         );
