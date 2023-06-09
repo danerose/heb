@@ -1,18 +1,19 @@
 import 'package:dartz/dartz.dart';
-import 'package:heb/app/domain/entities/pokemon_detail_response.entity.dart';
-import 'package:heb/app/domain/entities/sprites/sprite.entity.dart';
-import 'package:heb/app/domain/entities/types/type.entity.dart';
-import 'package:heb/app/domain/usecases/get_pokemon_detail.usecase.dart';
-import 'package:heb/core/exceptions/custom.exceptions.dart';
 import 'package:mockito/mockito.dart';
+
 import 'package:flutter_test/flutter_test.dart';
 import '../../test_hepers/test_hepers.mocks.dart';
 
+import 'package:heb/core/exceptions/custom.exceptions.dart';
+
+import 'package:heb/app/domain/entities/sprites/sprite.entity.dart';
 import 'package:heb/app/domain/entities/pokemon/pokemon.entity.dart';
-import 'package:heb/app/domain/entities/pokemon/pokemon_detail.entity.dart';
 import 'package:heb/app/domain/entities/pokemon_response.entity.dart';
+import 'package:heb/app/domain/entities/pokemon/pokemon_detail.entity.dart';
+import 'package:heb/app/domain/entities/pokemon_detail_response.entity.dart';
 
 import 'package:heb/app/domain/usecases/get_pokemon_list.usecase.dart';
+import 'package:heb/app/domain/usecases/get_pokemon_detail.usecase.dart';
 
 void main() {
   late MockPokemonRepository mockPokemonRepository;
