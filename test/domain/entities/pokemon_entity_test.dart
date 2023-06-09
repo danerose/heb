@@ -9,7 +9,7 @@ void main() {
   group('Pokemon', () {
     test('should return correct empty Pokemon entity', () {
       // arrange & act
-      final pokemon = Pokemon.empty();
+      const pokemon = Pokemon.empty();
 
       // assert
       expect(pokemon.name, '');
