@@ -29,7 +29,7 @@ void main() {
     'should get a PokemonDetailResponse from the repository',
     () async {
       // arrange
-      when(mockPokemonRepository.getPokemonDetail(url: ''))
+      when(mockPokemonRepository.getPokemonDetail(url: anyNamed('url')))
           .thenAnswer((_) async => const Right(pokemonDeail));
       // act
       final result = await usecaseDetail.execute(url: '');
