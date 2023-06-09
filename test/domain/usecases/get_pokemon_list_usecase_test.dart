@@ -2,7 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:mockito/mockito.dart';
 
 import 'package:flutter_test/flutter_test.dart';
-import '../../test_hepers/test_hepers.mocks.dart';
+import '../../test_helpers/test_hepers.mocks.dart';
 
 import 'package:heb/core/exceptions/custom.exceptions.dart';
 
@@ -125,5 +125,19 @@ void main() {
 
     // Verifica que el resultado sea exitoso (Right)
     expect(details, isA<Right<CustomException, PokemonDetailResponse>>());
+  });
+  test(
+      'should return Left<CustomException> when getPokemons throws an exception',
+      () async {
+    // arrange
+    when(mockPokemonRepository.getPokemonDetail(url: 'invalid_url'))
+        .thenThrow(const Left(CustomException));
+
+    // act
+    // assert
+    expect(
+      () => usecaseDetail.execute(url: 'invalid_url'),
+      throwsA(isInstanceOf<Left>()),
+    );
   });
 }
