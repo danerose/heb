@@ -34,21 +34,24 @@ class PokemonBloc extends Bloc<PokemonEvent, PokemonState> {
     final res = await _getPokemonList.execute(next: state.next);
     late List<Pokemon> list = [];
     late String next = '';
-    res.fold((CustomException l) => list = [], (PokemonResponse r) {
+    res.fold((CustomException l) {
+      emit(state.copyWith(loading: false, loadingMore: false));
+    }, (PokemonResponse r) {
       list = r.results;
       next = r.next;
     });
     final d = await Future.wait<Either<CustomException, PokemonDetailResponse>>(
       List.from(list.map((e) => _getPokemonDetail.execute(url: e.url))),
     );
-    for (var i = 0; i < d.length; i++) {
-      list[i] = list[i].copyWith(
-        detail: d[i].fold(
+    list = List.generate(
+      list.length,
+      (index) => list[index].copyWith(
+        detail: d[index].fold(
           (l) => const PokemonDetail.empty(),
           (r) => PokemonDetail(sprite: r.sprite, type: r.types),
         ),
-      );
-    }
+      ),
+    );
     emit(state.copyWith(
       loading: false,
       loadingMore: false,
@@ -61,12 +64,15 @@ class PokemonBloc extends Bloc<PokemonEvent, PokemonState> {
     PokemonAddToTeam event,
     Emitter<PokemonState> emit,
   ) {
-    List<Pokemon> team = state.team;
-    Pokemon pokemon = event.pokemon.copyWith(onTeam: true);
-    final list = state.list;
-    final index = list.indexWhere((e) => e.name == event.pokemon.name);
-    list[index] = pokemon;
-    emit(state.copyWith(team: [pokemon, ...team], list: list));
+    final onTeam = state.team.where((e) => e.name == event.pokemon.name);
+    if (onTeam.isEmpty) {
+      List<Pokemon> team = state.team;
+      Pokemon pokemon = event.pokemon.copyWith(onTeam: true);
+      final List<Pokemon> list = state.list;
+      final index = list.indexWhere((e) => e.name == event.pokemon.name);
+      list[index] = pokemon;
+      emit(state.copyWith(team: [pokemon, ...team], list: list));
+    }
   }
 
   void _onDeleteFromTeam(
@@ -75,7 +81,7 @@ class PokemonBloc extends Bloc<PokemonEvent, PokemonState> {
   ) {
     List<Pokemon> team = state.team;
     Pokemon pokemon = event.pokemon.copyWith(onTeam: false);
-    final list = state.list;
+    final List<Pokemon> list = state.list;
     final index = list.indexWhere((e) => e.name == event.pokemon.name);
     list[index] = pokemon;
     emit(state.copyWith(
