@@ -39,7 +39,7 @@ class PokemonTeamDialogOrganism extends StatelessWidget {
                   padding: const EdgeInsets.all(8.0),
                   child: ListTile(
                     dense: true,
-                    leading: ImageMolecule(
+                    leading: ImageAtom(
                       url: team[index].detail.sprite.front,
                       width: injector.get<SizeConfig>().sizeH * 10,
                       height: injector.get<SizeConfig>().sizeH * 10,

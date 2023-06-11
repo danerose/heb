@@ -32,7 +32,7 @@ class PokemonCardMolecule extends StatelessWidget {
           children: [
             Row(
               children: [
-                ImageMolecule(
+                ImageAtom(
                   url: pokemon.detail.sprite.front,
                   width: injector.get<SizeConfig>().sizeH * 20,
                   height: injector.get<SizeConfig>().sizeH * 20,

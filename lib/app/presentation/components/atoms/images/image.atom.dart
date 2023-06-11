@@ -4,14 +4,14 @@ import 'package:cached_network_image/cached_network_image.dart';
 
 import 'package:heb/core/constants/colors.constants.dart';
 
-class ImageMolecule extends StatelessWidget {
+class ImageAtom extends StatelessWidget {
   final String url;
   final double width;
   final double height;
   final BoxFit fit;
   final BorderRadius? borderRadius;
 
-  const ImageMolecule({
+  const ImageAtom({
     super.key,
     required this.url,
     required this.width,
@@ -50,6 +50,7 @@ class ImageMolecule extends StatelessWidget {
             imageUrl: url,
             imageBuilder: (BuildContext context, dynamic imageProvider) {
               return Stack(
+                alignment: Alignment.center,
                 children: [
                   Container(
                     decoration: BoxDecoration(
